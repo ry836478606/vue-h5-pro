@@ -1,13 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {Storage} from '@utils/storage'
+import {getTokenForStorage} from '@utils/index'
 import Home from '@views/home/index'
 import NotFound from '@views/not-found/index'
 import NoPermissions from '@views/no-permissions/index'
 
 Vue.use(VueRouter)
-
-const storageIns = new Storage()
 
 const routes = [
     {
@@ -59,7 +57,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     // 登录权限
     if(to.meta.requireAuth) {
-        if(!storageIns.getItem('acces_token')) {
+        if(!getTokenForStorage()) {
             next({
                 path: '/login',
                 query: {
@@ -70,7 +68,7 @@ router.beforeEach((to, from, next) => {
     }
 
     // 设置title
-    document.title = to?.meta?.title || 'h5-pro'
+    document.title = to?.meta?.title || 'vue-h5-pro'
 
     next()
 })

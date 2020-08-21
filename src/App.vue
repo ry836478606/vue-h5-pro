@@ -51,9 +51,9 @@
 
 		// 导航按钮
 		.nav {
-			height: 140px;
-			padding: 40px 60px;
-			line-height: 60px;
+			height: 70px;
+			padding: 20px 30px;
+			line-height: 30px;
 			box-sizing: border-box;
 			a {
 				font-weight: bold;

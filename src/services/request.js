@@ -2,9 +2,7 @@ import axios from 'axios'
 import {get} from 'lodash'
 import {Toast, Indicator} from 'mint-ui'
 import router from '@router/index'
-import {Storage} from '@utils/storage'
-
-const storageIns = new Storage()
+import {getTokenForStorage} from '@utils/index'
 
 class RequestError extends Error {}
 
@@ -48,7 +46,7 @@ const defaultOptions = {
     onBeforeFetch: (newFetchOptions) => {
         newFetchOptions.headers = {
             ...newFetchOptions.headers,
-            Authorization: `Bearer ${storageIns.getItem('access_token') || undefined}`, // 从localStorage中获取token
+            Authorization: `Bearer ${getTokenForStorage() || undefined}`, // 从localStorage中获取token
         }
         return newFetchOptions
     },

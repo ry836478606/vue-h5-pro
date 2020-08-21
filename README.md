@@ -1,4 +1,4 @@
-# h5-pro
+# vue-h5-pro
 
 > A vue2+ h5 project of my configuration framework
 
