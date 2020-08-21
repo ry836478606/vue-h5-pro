@@ -1,0 +1,26 @@
+@import '~@/assets/css/normalize.css';
+
+html,
+body,
+#app {
+    height: 100%;
+    background-color: @bg-color;
+}
+
+body {
+    /*  iPhone X适配 */
+    padding-bottom: constant(safe-area-inset-bottom); /* 兼容 iOS < 11.2 */
+    padding-bottom: env(safe-area-inset-bottom); /* 兼容 iOS >= 11.2 */
+}
+
+.nav {
+    padding: 30px;
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+
+        &.router-link-exact-active {
+            color: #42b983;
+        }
+    }
+}

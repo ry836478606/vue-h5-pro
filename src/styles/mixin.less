@@ -1,0 +1,171 @@
+// 全局mix函数
+
+// 样式中的写法：.pageAbsolute();
+.pageAbsolute() {
+    position: absolute;
+    top: 0;
+    height: 0;
+    height: 100%;
+    width: 100%;
+}
+
+// 文字溢出处理：单行
+.textOverflow() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+// 文字溢出处理：多行
+.textOverflowMulti (@lines) {
+    display: -webkit-box;
+
+    /*! autoprefixer: off */
+    -webkit-box-orient: vertical;
+
+    /*! autoprefixer: on */
+    -webkit-line-clamp: @lines;
+    overflow: hidden;
+    text-align: justify;
+    word-break: break-all;
+}
+
+
+// 清除浮动
+.clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// 强制换行
+.break-all() {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+// 移动端1px的线 利用伪类+background-image
+.hairline(@position, @color)  {
+    // top
+    & when (@position = top) {
+        &:before {
+            left: 0;
+            top: 0;
+            bottom: auto;
+            right: auto;
+            height: 1Px;
+            width: 100%;
+            .hairline-background-image(@color);
+            background-size: 100% 1Px;
+        }
+    }
+    // left
+    & when (@position = left) {
+        &:before {
+            left: 0;
+            top: 0;
+            bottom: auto;
+            right: auto;
+            width: 1Px;
+            height: 100%;
+            .hairline-background-image(@color);
+            background-size: 1Px 100%;
+        }
+    }
+    // bottom
+    & when (@position = bottom) {
+        &:after {
+            left: 0;
+            bottom: 0;
+            right: auto;
+            top: auto;
+            height: 1Px;
+            width: 100%;
+            .hairline-background-image(@color);
+            background-size: 100% 1Px;
+        }
+    }
+    // right
+    & when (@position = right) {
+        &:after {
+            right: 0;
+            top: 0;
+            left: auto;
+            bottom: auto;
+            width: 1Px;
+            height: 100%;
+            .hairline-background-image(@color);
+            background-size: 1Px 100%;
+        }
+    }
+}
+.hairline-background-image(@color) {
+    content: "";
+    position: absolute;
+    display: block;
+    z-index: 15;
+    background-image: linear-gradient(180deg, @color, @color 50%, transparent 50%);
+    background-repeat: no-repeat;
+}
+
+//**
+// * @desc 文本多行文字截断
+// * @param {Number} @lines 行数
+// * @param {Number} @line-height 行高 当@lines=1的时候，@line-height默认传0，相当于截取的字节数
+// */
+.line-clamp(@lines, @line-height: 1.4em) {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    & when (@lines = 1) {
+        white-space: nowrap;
+        width: 100% - @line-height;
+    }
+
+    & when not (@lines = 1) {
+        .flexbox();
+        -webkit-box-orient: vertical;
+        box-orient: vertical;
+        -webkit-line-clamp: @lines;
+        line-clamp: @lines;
+        line-height: @line-height;
+        max-height: @line-height * @lines;
+    }
+}
+
+
+/**
+/* @desc 滚动条的样式
+/* ::-webkit-scrollbar 滚动条整体部分
+/* ::-webkit-scrollbar-thumb 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+/* ::-webkit-scrollbar-track 滚动条的轨道（里面装有Thumb）
+/* ::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+/* ::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+/* ::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+/* ::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+ */
+.scrollbar(@color: #f5f5f5; @width: 16px; @height: 16px) {
+    ///定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸/
+    &::-webkit-scrollbar {
+        width: @width;
+        height: @height;
+        background-color: @color;
+    }
+    //  /定义滚动条轨道 内阴影+圆角/
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: @color;
+    }
+
+    // /定义滑块 内阴影+圆角/
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+}
