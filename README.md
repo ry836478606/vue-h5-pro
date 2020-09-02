@@ -2,6 +2,8 @@
 
 > A vue2+ h5 project of my configuration framework
 
+## 预览地址
+- [https://ry836478606.github.io/vue-h5-pro/]
 ## 简介
 移动端h5页面框架：vue-cli3生成框架，集成lib-flexible.js页面自适应，less样式预处理，axios请求封装，vue-router路由，vuex状态管理，mint-ui，better-scroll封装...
 
