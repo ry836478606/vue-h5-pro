@@ -13,7 +13,8 @@
 		"build:test": "cross-env PRO_ENV=production-test vue-cli-service build --mode test",
 		"build:master": "cross-env PRO_ENV=production-master vue-cli-service build --mode production",
 		"lint": "cross-env PRO_ENV=development vue-cli-service lint",
-		"lint-staged": "lint-staged"
+		"lint-staged": "lint-staged",
+		"gh-pages": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"axios": "^0.19.2",
