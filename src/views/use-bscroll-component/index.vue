@@ -1,31 +1,31 @@
 <template>
-  <div class="main">
-    <div class="allCount">总数据rows_found：{{ total }}</div>
+	<div class="main">
+		<div class="allCount">总数据rows_found：{{ total }}</div>
 
-    <!--
+		<!--
 			尽量在接口请求完再去渲染“BetterScroll”；
 			不然可能在接口还未请求完，“BetterScroll”已经初始化完成，高度没随着数据变化，不能滚动
 		-->
-    <BetterScroll
-      v-if="dataList.length"
-      wrapperClass="scrollWrapper"
-      v-bind:scroll-opt="{ pullUpLoad: true, pullDownRefresh: true }"
-      v-bind:fetchPullUp="fetchData"
-      v-bind:fetchPullDown="initFetch"
-      v-bind:botTipText="botTipText"
-    >
-      <div v-for="(item, index) of dataList" :key="index" class="item">
-        {{ index }} - {{ item.moment.content }}
-      </div>
-    </BetterScroll>
+		<BetterScroll
+			v-if="dataList.length"
+			wrapperClass="scrollWrapper"
+			v-bind:scroll-opt="{ pullUpLoad: true, pullDownRefresh: true }"
+			v-bind:fetchPullUp="fetchData"
+			v-bind:fetchPullDown="initFetch"
+			v-bind:botTipText="botTipText"
+		>
+			<div v-for="(item, index) of dataList" :key="index" class="item">
+				{{ index }} - {{ item.moment.content }}
+			</div>
+		</BetterScroll>
 
-    <div v-else class="noList">
-      <div>暂无数据</div>
-      <img class="img" alt="Vue logo" src="~@assets/logo.png" />
-    </div>
+		<div v-else class="noList">
+			<div>暂无数据</div>
+			<img class="img" alt="Vue logo" src="~@assets/logo.png" />
+		</div>
 
-    <div class="other">其他元素-不影响滚动</div>
-  </div>
+		<div class="other">其他元素-不影响滚动</div>
+	</div>
 </template>
 
 <script>

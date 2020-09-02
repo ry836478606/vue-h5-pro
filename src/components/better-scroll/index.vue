@@ -1,10 +1,10 @@
 <template>
-  <div
-    v-bind:class="[wrapperClass ? wrapperClass : '', 'wrapper']"
-    ref="scrollRef"
-  >
-    <div class="content">
-      <!--<div class="pulldownWrapper">
+	<div
+		v-bind:class="[wrapperClass ? wrapperClass : '', 'wrapper']"
+		ref="scrollRef"
+	>
+		<div class="content">
+			<!--<div class="pulldownWrapper">
 				<div v-show="beforePullDown">
 					<span>下拉刷新</span>
 				</div>
@@ -18,14 +18,14 @@
 				</div>
 			</div>-->
 
-      <slot></slot>
+			<slot></slot>
 
-      <div class="botTip">
-        <div v-if="botTipText && !isPullingUp">{{ botTipText }}</div>
-        <div v-if="isPullingUp">Loading...</div>
-      </div>
-    </div>
-  </div>
+			<div class="botTip">
+				<div v-if="botTipText && !isPullingUp">{{ botTipText }}</div>
+				<div v-if="isPullingUp">Loading...</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>

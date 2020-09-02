@@ -1,21 +1,21 @@
 <template>
-  <div class="main">
-    <div class="allCount">总数据rows_found：{{ total }}</div>
+	<div class="main">
+		<div class="allCount">总数据rows_found：{{ total }}</div>
 
-    <div class="wrapper" ref="wrapper">
-      <div class="content">
-        <div v-for="(item, index) of dataList" :key="index" class="item">
-          {{ index }} - {{ item.moment.content }}
-        </div>
-        <div class="tip">
-          <div v-if="!isPullUpload">可加载更多</div>
-          <div v-else>Loading...</div>
-        </div>
-      </div>
-    </div>
+		<div class="wrapper" ref="wrapper">
+			<div class="content">
+				<div v-for="(item, index) of dataList" :key="index" class="item">
+					{{ index }} - {{ item.moment.content }}
+				</div>
+				<div class="tip">
+					<div v-if="!isPullUpload">可加载更多</div>
+					<div v-else>Loading...</div>
+				</div>
+			</div>
+		</div>
 
-    <div class="other">其他元素-不影响滚动</div>
-  </div>
+		<div class="other">其他元素-不影响滚动</div>
+	</div>
 </template>
 
 <script>

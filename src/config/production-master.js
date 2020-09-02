@@ -1,3 +1,3 @@
 export default {
-    apiHost: 'https://api.ihuzan.com',
+    apiHost: 'https://dev-api.51zan.com',
 }

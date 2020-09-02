@@ -1,3 +1,3 @@
 export default {
-    apiHost: 'https://test-api.51zan.com',
+    apiHost: 'https://dev-api.51zan.com',
 }
