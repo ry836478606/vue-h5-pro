@@ -1,75 +1,74 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import { getTokenForStorage } from "@utils";
-import Home from "@views/home";
-import NotFound from "@views/not-found";
-import NoPermissions from "@views/no-permissions";
-import ScrollPage from "@views/scroll-page";
-import UseBScrollComponent from "@views/use-bscroll-component";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import {getTokenForStorage} from '@utils';
+import Home from '@views/home';
+import NotFound from '@views/not-found';
+import NoPermissions from '@views/no-permissions';
+import ScrollPage from '@views/scroll-page';
+import UseBScrollComponent from '@views/use-bscroll-component';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
-        name: "Home",
-        component: Home
+        path: '/',
+        name: 'Home',
+        component: Home,
     },
     {
-        path: "/about",
-        name: "About",
+        path: '/about',
+        name: 'About',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () =>
-            import(/* webpackChunkName: "about" */ "@views/about/index.vue"),
+        component: () => import(/* webpackChunkName: "about" */ '@views/about/index.vue'),
         meta: {
-            title: "群详情",
+            title: '群详情',
             // requireAuth: true,
-            keepAlive: false // 页面生命一直存活（离开当前页面也存活）
-        }
+            keepAlive: false, // 页面生命一直存活（离开当前页面也存活）
+        },
     },
     {
-        path: "/404",
-        name: "NotFound",
+        path: '/404',
+        name: 'NotFound',
         component: NotFound,
         meta: {
-            title: "404页"
-        }
+            title: '404页',
+        },
     },
     {
-        path: "/403",
-        name: "NoPermissions",
+        path: '/403',
+        name: 'NoPermissions',
         component: NoPermissions,
         meta: {
-            title: "无权限"
-        }
+            title: '无权限',
+        },
     },
     {
-        path: "/scroll-page",
-        name: "ScrollPage",
+        path: '/scroll-page',
+        name: 'ScrollPage',
         component: ScrollPage,
         meta: {
-            title: "BScroll页"
-        }
+            title: 'BScroll页',
+        },
     },
     {
-        path: "/use-bscroll-component",
-        name: "UseBScrollComponent",
+        path: '/use-bscroll-component',
+        name: 'UseBScrollComponent',
         component: UseBScrollComponent,
         meta: {
-            title: "使用BScroll组件"
-        }
+            title: '使用BScroll组件',
+        },
     },
     {
-    // 没匹配到路由的都转跳到404
-        path: "*",
-        redirect: "/404"
-    }
+        // 没匹配到路由的都转跳到404
+        path: '*',
+        redirect: '/404',
+    },
 ];
 
 const router = new VueRouter({
-    routes
+    routes,
 });
 
 // 路由导航卫士
@@ -78,16 +77,16 @@ router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {
         if (!getTokenForStorage()) {
             next({
-                path: "/login",
+                path: '/login',
                 query: {
-                    redirect: to.fullPath // fullPath为当前要访问的页面（带地址到login页，登录完再跳转）
-                }
+                    redirect: to.fullPath, // fullPath为当前要访问的页面（带地址到login页，登录完再跳转）
+                },
             });
         }
     }
 
     // 设置title
-    document.title = to?.meta?.title || "vue-h5-pro";
+    document.title = to?.meta?.title || 'vue-h5-pro';
 
     next();
 });

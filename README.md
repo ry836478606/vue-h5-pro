@@ -62,7 +62,6 @@ npm run lint
 - webpack [文档] (https://webpack.js.org/)
 
 ## git规范
-- 提交前先“npm run lint”格式化下代码
 [语义化版本](https://semver.org/lang/zh-CN/) 
 
 [约定式提交](https://www.conventionalcommits.org/zh/v1.0.0-beta.4/)

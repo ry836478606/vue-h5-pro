@@ -1,4 +1,4 @@
-let rootFontSize
+let rootFontSize;
 
 /**
  * 获取html元素的fontSize
@@ -6,13 +6,13 @@ let rootFontSize
  */
 function getRootFontSize() {
     if (!rootFontSize) {
-        const doc = document.documentElement
-        const fontSize = doc.style.fontSize || window.getComputedStyle(doc).fontSize
+        const doc = document.documentElement;
+        const fontSize = doc.style.fontSize || window.getComputedStyle(doc).fontSize;
 
-        rootFontSize = parseFloat(fontSize)
+        rootFontSize = parseFloat(fontSize);
     }
 
-    return rootFontSize
+    return rootFontSize;
 }
 
 /**
@@ -22,5 +22,5 @@ function getRootFontSize() {
  * @returns {number}
  */
 export function pxToRem(px = 0, fontScale = 100) {
-    return Math.round(px * (getRootFontSize() / fontScale))
+    return Math.round(px * (getRootFontSize() / fontScale));
 }

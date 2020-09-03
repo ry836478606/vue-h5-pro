@@ -4,11 +4,11 @@
  * @returns {boolean}
  */
 function isWindow(val) {
-    return val === window
+    return val === window;
 }
 
 // 元素溢出滚动的正则
-const overflowScrollReg = /scroll|auto/i
+const overflowScrollReg = /scroll|auto/i;
 
 /**
  * 获取最上层的可滚动元素
@@ -17,28 +17,28 @@ const overflowScrollReg = /scroll|auto/i
  * @returns {(() => (Node | null))|ActiveX.IXMLDOMNode|(Node & ParentNode)|Window}
  */
 export function getScroller(el, root = window) {
-    let node = el
+    let node = el;
 
     // 向上循环node的parentNode，确定最上层哪个是竖向的可滚动元素
     while (node && node.tagName !== 'HTML' && node.nodeType === 1 && node !== root) {
-        const {overflowY} = window.getComputedStyle(node)
+        const {overflowY} = window.getComputedStyle(node);
 
         // 竖向是否可滚动
         if (overflowScrollReg.test(overflowY)) {
             if (node.tagName !== 'BODY') {
-                return node
+                return node;
             }
             // node是body
-            const {overflowY: htmlOverflowY} = window.getComputedStyle(node.parentNode)
+            const {overflowY: htmlOverflowY} = window.getComputedStyle(node.parentNode);
 
             if (overflowScrollReg.test(htmlOverflowY)) {
-                return node
+                return node;
             }
         }
-        node = node.parentNode
+        node = node.parentNode;
     }
 
-    return root
+    return root;
 }
 
 /**
@@ -46,7 +46,7 @@ export function getScroller(el, root = window) {
  * @param el
  */
 export function getScrollTop(el) {
-    return 'scrollTop' in el ? el.scrollTop : el.pageYOffset
+    return 'scrollTop' in el ? el.scrollTop : el.pageYOffset;
 }
 
 /**
@@ -56,9 +56,9 @@ export function getScrollTop(el) {
  */
 export function setScrollTop(el, value) {
     if ('scrollTop' in el) {
-        el.scrollTop = value
+        el.scrollTop = value;
     } else {
-        el.scrollTo(el.scrollX, value)
+        el.scrollTo(el.scrollX, value);
     }
 }
 
@@ -67,7 +67,7 @@ export function setScrollTop(el, value) {
  * @returns {number}
  */
 export function getRootScrollTop() {
-    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 }
 
 /**
@@ -75,8 +75,8 @@ export function getRootScrollTop() {
  * @param value
  */
 export function setRootScrollTop(value) {
-    setScrollTop(window, value)
-    setScrollTop(document.body, value)
+    setScrollTop(window, value);
+    setScrollTop(document.body, value);
 }
 
 /**
@@ -87,11 +87,11 @@ export function setRootScrollTop(value) {
  */
 export function getElementTop(el, scroller) {
     if (isWindow(el)) {
-        return 0
+        return 0;
     }
 
-    const scrollTop = scroller ? getScrollTop(scroller) : getRootScrollTop()
-    return el.getBoundingClientRect().top + scrollTop
+    const scrollTop = scroller ? getScrollTop(scroller) : getRootScrollTop();
+    return el.getBoundingClientRect().top + scrollTop;
 }
 
 /**
@@ -101,9 +101,9 @@ export function getElementTop(el, scroller) {
  */
 export function getVisibleHeight(el) {
     if (isWindow(el)) {
-        return el.innerHeight
+        return el.innerHeight;
     }
-    return el.getBoundingClientRect().height
+    return el.getBoundingClientRect().height;
 }
 
 /**
@@ -113,7 +113,7 @@ export function getVisibleHeight(el) {
  */
 export function getVisibleTop(el) {
     if (isWindow(el)) {
-        return 0
+        return 0;
     }
-    return el.getBoundingClientRect().top
+    return el.getBoundingClientRect().top;
 }
