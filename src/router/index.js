@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import {getTokenForStorage} from '@utils';
 import Home from '@views/home';
+import Login from '@views/login';
 import NotFound from '@views/not-found';
 import NoPermissions from '@views/no-permissions';
 import ScrollPage from '@views/scroll-page';
@@ -14,6 +15,14 @@ const routes = [
         path: '/',
         name: 'Home',
         component: Home,
+        meta: {
+            requireAuth: true,
+        },
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login,
     },
     {
         path: '/about',
@@ -24,7 +33,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '@views/about/index.vue'),
         meta: {
             title: '群详情',
-            // requireAuth: true,
+            requireAuth: true,
             keepAlive: false, // 页面生命一直存活（离开当前页面也存活）
         },
     },
@@ -42,6 +51,7 @@ const routes = [
         component: NoPermissions,
         meta: {
             title: '无权限',
+            requireAuth: true,
         },
     },
     {
@@ -50,6 +60,7 @@ const routes = [
         component: ScrollPage,
         meta: {
             title: 'BScroll页',
+            requireAuth: true,
         },
     },
     {
@@ -58,12 +69,16 @@ const routes = [
         component: UseBScrollComponent,
         meta: {
             title: '使用BScroll组件',
+            requireAuth: true,
         },
     },
     {
         // 没匹配到路由的都转跳到404
         path: '*',
         redirect: '/404',
+        meta: {
+            title: '404',
+        },
     },
 ];
 
@@ -82,13 +97,15 @@ router.beforeEach((to, from, next) => {
                     redirect: to.fullPath, // fullPath为当前要访问的页面（带地址到login页，登录完再跳转）
                 },
             });
+        } else {
+            next();
         }
+    } else {
+        next();
     }
 
     // 设置title
     document.title = to?.meta?.title || 'vue-h5-pro';
-
-    next();
 });
 
 // 设置本地的路由（用于设置页面切换动画）

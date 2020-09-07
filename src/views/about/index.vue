@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="globalWrapper">
-            <div class="item" style="font-weight: bold">global-data：</div>
+            <div class="item" style="font-weight: bold">（vuex测试）global-data：</div>
             <div class="item">count：{{ count }}</div>
             <div class="item">countAlias：{{ countAlias }}</div>
 
@@ -27,7 +27,7 @@
                 reduce-globalCount-by-action：<button @click="addCountByAction">click</button>
             </div>
         </div>
-        <div class="title">群详情：</div>
+        <div class="title">（接口错误测试）群详情：</div>
         <div class="cont">
             <div class="row">
                 <div class="label">群名称：</div>

@@ -75,7 +75,12 @@ const defaultOptions = {
         if (status === 401) {
             // 登出处理
             console.log('401: 退出登录，返回登录页！');
-            // router.push('/login')
+            router.push({
+                path: '/login',
+                query: {
+                    redirect: window.myVue._route.fullPath,
+                },
+            });
         } else if (status === 403) {
             // 跳转403
             router.push('/403');
